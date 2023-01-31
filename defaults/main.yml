@@ -2,12 +2,13 @@
 go_apt_mirror_binary_path: "/usr/local/bin"
 go_apt_mirror_user: "root"
 go_apt_mirror_group: "root"
+go_apt_mirror_storage_path: "/var/spool/go-apt-mirror"
 
 go_apt_mirror_config_path: "/etc/apt/mirror.toml"
 go_apt_mirror_config: |
   # Directory to store mirrored files and other control files.
   # The directory must be writable by go-apt-mirror.
-  dir = "/var/spool/go-apt-mirror"
+  dir = "{{ go_apt_mirror_storage_path }}"
 
   # Maximum concurrent connections for an upstream server.
   # Setting this 0 disables limit on the number of connections.
