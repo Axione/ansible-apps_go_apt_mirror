@@ -20,16 +20,44 @@
     path: "{{ go_apt_mirror_storage_path }}"
     state: directory
 
-- name: "Create systemd"
-  ansible.builtin.template:
-    src: 'go-apt-mirror.service.j2'
-    dest: '/etc/systemd/system/go-apt-mirror.service'
-    mode: '0640'
-  notify: "restart go-apt-mirror"
+- name: "Ensure crontab exist"
+  package:
+    name: cron
+    state: present
 
-- name: "Enable and Start go-apt-mirror.service"
-  ansible.builtin.service:
-    name: go-apt-mirror
-    state: started
-    enabled: true
-    daemon_reload: true
+- name: "Add rule to update repo every night at 1:00 am"
+  cron:
+    name: "Update apt mirror"
+    minute: "0"
+    hour: "1"
+    job: "{{ go_apt_mirror_binary_path }}/go-apt-mirror"
+
+
+#- name: "Ensure /etc/systemd/system/go-apt-mirror.service.d directory exists."
+#  ansible.builtin.file:
+#    path: /etc/systemd/system/go-apt-mirror.service.d
+#    state: directory
+#    mode: 0755
+#  when: go_apt_mirror_service_settings | length > 0
+#
+#- name: Configure docker service environment.
+#  ansible.builtin.template:
+#    src: http-proxy.conf.j2
+#    dest: /etc/systemd/system/go-apt-mirror.service.d/http-proxy.conf
+#    mode: 0644
+#  when: go_apt_mirror_service_settings | length > 0
+#  notify: "restart go-apt-mirror"
+#
+#- name: "Create systemd"
+#  ansible.builtin.template:
+#    src: 'go-apt-mirror.service.j2'
+#    dest: '/etc/systemd/system/go-apt-mirror.service'
+#    mode: '0640'
+#  notify: "restart go-apt-mirror"
+#
+#- name: "Enable and Start go-apt-mirror.service"
+#  ansible.builtin.service:
+#    name: go-apt-mirror
+#    state: started
+#    enabled: true
+#    daemon_reload: true

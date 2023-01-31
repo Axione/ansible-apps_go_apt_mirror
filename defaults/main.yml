@@ -4,6 +4,7 @@ go_apt_mirror_user: "root"
 go_apt_mirror_group: "root"
 go_apt_mirror_storage_path: "/var/spool/go-apt-mirror"
 
+go_apt_mirror_service_settings: []
 go_apt_mirror_config_path: "/etc/apt/mirror.toml"
 go_apt_mirror_config: |
   # Directory to store mirrored files and other control files.
