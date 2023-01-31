@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=go-apt-mirror
+After=network-online.target
+StartLimitInterval=0
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/local/bin/go-apt-mirror
+ExecReload=/bin/kill -HUP $MAINPID
+SyslogIdentifier=go-apt-mirror
+RestartSec=1
+PrivateTmp=yes
+
+[Install]

@@ -1,0 +1,46 @@
+---
+go_apt_mirror_binary_path: "/usr/local/bin"
+go_apt_mirror_user: "root"
+go_apt_mirror_group: "root"
+
+go_apt_mirror_config_path: "/etc/apt/mirror.toml"
+go_apt_mirror_config: |
+  # Directory to store mirrored files and other control files.
+  # The directory must be writable by go-apt-mirror.
+  dir = "/var/spool/go-apt-mirror"
+
+  # Maximum concurrent connections for an upstream server.
+  # Setting this 0 disables limit on the number of connections.
+  # Default: 10
+  max_conns = 10
+
+  # log specifies logging configurations.
+  # Details at https://godoc.org/github.com/cybozu-go/well#LogConfig
+  [log]
+  level = "info"
+  format = "plain"
+
+  # [mirror.xxx] defines a mirror configuration for a debian repository.
+  # "xxx" must match this regexp: ^[a-z0-9_-]+$
+  #
+  # url:           The repository base URL.
+  # suites:        List of suites to mirror.  see sources.list(5).
+  # sections:      List of sections to mirror.  see sources.list(5).
+  # mirror_source: true to mirror source archives.  Default is false.
+  # architectures: List of architectures to mirror.  "all" is always mirrored.
+#  [mirror.ubuntu]
+#  url = "http://archive.ubuntu.com/ubuntu"
+#  suites = ["trusty", "trusty-updates"]
+#  sections = ["main", "restricted", "universe",
+#              "main/debian-installer",
+#              "restricted/debian-installer",
+#              "universe/debian-installer"]
+#  mirror_source = true
+#  architectures = ["amd64", "i386"]
+#
+#  [mirror.security]
+#  url = "http://security.ubuntu.com/ubuntu"
+#  suites = ["trusty-security"]
+#  sections = ["main", "restricted", "universe"]
+#  mirror_source = false
+#  architectures = ["amd64", "i386"]
