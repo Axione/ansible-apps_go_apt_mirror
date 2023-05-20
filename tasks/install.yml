@@ -19,14 +19,15 @@
   ansible.builtin.file:
     path: "{{ go_apt_mirror_storage_path }}"
     state: directory
+    mode: '0755'
 
 - name: "Ensure crontab exist"
-  package:
+  ansible.builtin.package:
     name: cron
     state: present
 
 - name: "Add rule to update repo every night at 1:00 am"
-  cron:
+  ansible.builtin.cron:
     name: "Update apt mirror"
     minute: "0"
     hour: "1"

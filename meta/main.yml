@@ -14,8 +14,8 @@ galaxy_info:
         - "jammy"
     - name: "Debian"
       versions:
-        - "bullseye"
         - "buster"
+        - "bullseye"
 
   galaxy_tags:
     - apt
