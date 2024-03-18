@@ -1,5 +1,5 @@
 ---
-- name: "restart go-apt-mirror"
+- name: "Restart go-apt-mirror"
   ansible.builtin.service:
     name: "go-apt-mirror"
     state: "restarted"
