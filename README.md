@@ -22,6 +22,7 @@
 ## Description
 
 Deploy [go-apt-mirror](https://github.com/cybozu-go/aptutil) an apt cacher like acng but in go.
+
 ## Requirements
 
 none
@@ -39,7 +40,6 @@ See [variables](/defaults/main.yml) for more details.
           gather_facts: true
           roles:
             - role: ansible-apps_go_apt_mirror
-
 
 ## License
 
